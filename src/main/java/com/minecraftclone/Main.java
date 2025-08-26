@@ -123,9 +123,7 @@ public class Main {
             if (pitch < -89.0f) pitch = -89.0f;
         });
     }
-
-
-    // --- loop(): substitua seu método por este ---
+    
     private void loop() {
         glClearColor(0.0f, 0.9f, 2.0f, 0.0f);
 
