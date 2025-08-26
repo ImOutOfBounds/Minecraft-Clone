@@ -7,6 +7,7 @@ import org.lwjgl.system.MemoryStack;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.Objects;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -43,7 +44,7 @@ public class Main {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     private void perspectiveGL(float fovY, float aspect, float zNear, float zFar) {
@@ -63,6 +64,7 @@ public class Main {
         long monitor = glfwGetPrimaryMonitor();
         GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
+        assert vidmode != null;
         window = glfwCreateWindow(vidmode.width(), vidmode.height(), "Minecraft Clone", monitor, NULL);
         if (window == NULL) throw new RuntimeException("Falha ao criar janela");
 
@@ -117,8 +119,8 @@ public class Main {
             offsetX *= MOUSE_SENSITIVITY;
             offsetY *= MOUSE_SENSITIVITY;
 
-            yaw   += offsetX;
-            pitch += offsetY;
+            yaw   += (float) offsetX;
+            pitch += (float) offsetY;
 
             // limita a câmera pra não virar de cabeça pra baixo
             if (pitch > 89.0f) pitch = 89.0f;
