@@ -1,5 +1,6 @@
 package com.minecraftclone;
 
+import com.minecraftclone.world.Block;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
@@ -12,6 +13,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.MemoryUtil.*;
+
 
 public class Main {
 
@@ -148,10 +150,11 @@ public class Main {
             for (int i = 0; i < chunkSize; i++) {
                 for (int j = 0; j < chunkSize; j++) {
                     for (int k = 0; k < chunkSize; k++) {
-                        drawCube(i, j, k, cubeTexture);
+                        Block.render(i, j, k, cubeTexture);
                     }
                 }
             }
+
 
             glfwSwapBuffers(window);
         }
@@ -210,8 +213,7 @@ public class Main {
         }
     }
 
-
-    public int loadTexture(String path) {
+    public static int loadTexture(String path) {
         int textureID;
         try (MemoryStack stack = MemoryStack.stackPush()) {
             IntBuffer width = stack.mallocInt(1);
@@ -236,53 +238,6 @@ public class Main {
             stbi_image_free(image);
         }
         return textureID;
-    }
-
-    private void drawCube(float x, float y, float z, int textureID) {
-        glPushMatrix();
-        glTranslatef(x, y, z);
-        glBindTexture(GL_TEXTURE_2D, textureID);
-
-        glBegin(GL_QUADS);
-
-        // Frente
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, 0.5f, 0.5f);
-
-        // Trás
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, -0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, 0.5f, -0.5f);
-
-        // Esquerda
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(-0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(-0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, 0.5f, -0.5f);
-
-        // Direita
-        glTexCoord2f(0f, 0f); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(0.5f, 0.5f, -0.5f);
-
-        // Topo
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, 0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(-0.5f, 0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(0.5f, 0.5f, -0.5f);
-
-        // Fundo
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, -0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, -0.5f, 0.5f);
-
-        glEnd();
-        glPopMatrix();
     }
 
     public static void main(String[] args) {
