@@ -4,11 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09bb2019-497f-46d7-be10-c7c9db060ea0" name="Changes" comment="" />
+    <list default="true" id="09bb2019-497f-46d7-be10-c7c9db060ea0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/engine/Input.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/engine/Shader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/engine/Texture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/engine/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/graphics/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/graphics/Renderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/world/Block.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/world/Chunk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minecraftclone/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,21 +53,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/Minecraft-Clone&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Superframe Force/OneDrive/Documents/GitHub/avatar-talk/Minecraft/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "0.0.0.1",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/dev/Minecraft-Clone",
+    "onboarding.tips.debug.path": "C:/Users/Superframe Force/OneDrive/Documents/GitHub/avatar-talk/Minecraft/src/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\dev\Minecraft-Clone\src\main\resources" />
