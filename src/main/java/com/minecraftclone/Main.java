@@ -112,7 +112,7 @@ public class Main {
             }
 
             double offsetX = lastMouseX - xpos;
-            double offsetY = lastMouseY - ypos; // invertido: cima aumenta pitch
+            double offsetY = lastMouseY - ypos;
             lastMouseX = xpos;
             lastMouseY = ypos;
 
@@ -132,7 +132,7 @@ public class Main {
         glClearColor(0.0f, 0.9f, 2.0f, 0.0f);
 
         // posição inicial da câmera para ver a chunk (centrinho 8,8,8)
-        camX = 8f; camY = 8f; camZ = 35f; // recua no Z pra enxergar tudo
+        camX = 8f; camY = 30f; camZ = 35f; // recua no Z pra enxergar tudo
 
         int chunkSize = 16;
 
@@ -150,7 +150,7 @@ public class Main {
 
             // 4) desenha o mundo (sem glRotatef fixo aqui)
             for (int i = 0; i < chunkSize; i++) {
-                for (int j = 0; j < chunkSize; j++) {
+                for (int j = 0; j < chunkSize * 2; j++) {
                     for (int k = 0; k < chunkSize; k++) {
                         Block.render(i, j, k, cubeTexture);
                     }
@@ -171,13 +171,13 @@ public class Main {
         float radPitch = (float) Math.toRadians(pitch);
 
         // Vetor frente (forward)
-        float forwardX = (float) Math.cos(radPitch) * (float) Math.sin(radYaw);
+        float forwardX = (float) -Math.cos(radPitch) * (float) Math.sin(radYaw);
         float forwardY = (float) Math.sin(radPitch);
         float forwardZ = (float) -Math.cos(radPitch) * (float) Math.cos(radYaw);
 
         // Vetor direita (right)
         float rightX = (float) Math.sin(radYaw - Math.PI / 2.0);
-        float rightZ = (float) -Math.cos(radYaw - Math.PI / 2.0);
+        float rightZ = (float) Math.cos(radYaw - Math.PI / 2.0);
 
         // W
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
