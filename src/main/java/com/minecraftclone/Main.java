@@ -1,17 +1,20 @@
 package com.minecraftclone;
 
+import com.minecraftclone.world.Block;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.Objects;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.MemoryUtil.*;
+
 
 public class Main {
 
@@ -41,7 +44,7 @@ public class Main {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     private void perspectiveGL(float fovY, float aspect, float zNear, float zFar) {
@@ -61,6 +64,7 @@ public class Main {
         long monitor = glfwGetPrimaryMonitor();
         GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
+        assert vidmode != null;
         window = glfwCreateWindow(vidmode.width(), vidmode.height(), "Minecraft Clone", monitor, NULL);
         if (window == NULL) throw new RuntimeException("Falha ao criar janela");
 
@@ -108,27 +112,27 @@ public class Main {
             }
 
             double offsetX = lastMouseX - xpos;
-            double offsetY = lastMouseY - ypos; // invertido: cima aumenta pitch
+            double offsetY = lastMouseY - ypos;
             lastMouseX = xpos;
             lastMouseY = ypos;
 
             offsetX *= MOUSE_SENSITIVITY;
             offsetY *= MOUSE_SENSITIVITY;
 
-            yaw   += offsetX;
-            pitch += offsetY;
+            yaw   += (float) offsetX;
+            pitch += (float) offsetY;
 
             // limita a câmera pra não virar de cabeça pra baixo
             if (pitch > 89.0f) pitch = 89.0f;
             if (pitch < -89.0f) pitch = -89.0f;
         });
     }
-    
+
     private void loop() {
         glClearColor(0.0f, 0.9f, 2.0f, 0.0f);
 
         // posição inicial da câmera para ver a chunk (centrinho 8,8,8)
-        camX = 8f; camY = 8f; camZ = 35f; // recua no Z pra enxergar tudo
+        camX = 8f; camY = 30f; camZ = 35f; // recua no Z pra enxergar tudo
 
         int chunkSize = 16;
 
@@ -146,12 +150,13 @@ public class Main {
 
             // 4) desenha o mundo (sem glRotatef fixo aqui)
             for (int i = 0; i < chunkSize; i++) {
-                for (int j = 0; j < chunkSize; j++) {
+                for (int j = 0; j < chunkSize * 2; j++) {
                     for (int k = 0; k < chunkSize; k++) {
-                        drawCube(i, j, k, cubeTexture);
+                        Block.render(i, j, k, cubeTexture);
                     }
                 }
             }
+
 
             glfwSwapBuffers(window);
         }
@@ -166,13 +171,13 @@ public class Main {
         float radPitch = (float) Math.toRadians(pitch);
 
         // Vetor frente (forward)
-        float forwardX = (float) Math.cos(radPitch) * (float) Math.sin(radYaw);
+        float forwardX = (float) -Math.cos(radPitch) * (float) Math.sin(radYaw);
         float forwardY = (float) Math.sin(radPitch);
         float forwardZ = (float) -Math.cos(radPitch) * (float) Math.cos(radYaw);
 
         // Vetor direita (right)
         float rightX = (float) Math.sin(radYaw - Math.PI / 2.0);
-        float rightZ = (float) -Math.cos(radYaw - Math.PI / 2.0);
+        float rightZ = (float) Math.cos(radYaw - Math.PI / 2.0);
 
         // W
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
@@ -210,8 +215,7 @@ public class Main {
         }
     }
 
-
-    public int loadTexture(String path) {
+    public static int loadTexture(String path) {
         int textureID;
         try (MemoryStack stack = MemoryStack.stackPush()) {
             IntBuffer width = stack.mallocInt(1);
@@ -236,53 +240,6 @@ public class Main {
             stbi_image_free(image);
         }
         return textureID;
-    }
-
-    private void drawCube(float x, float y, float z, int textureID) {
-        glPushMatrix();
-        glTranslatef(x, y, z);
-        glBindTexture(GL_TEXTURE_2D, textureID);
-
-        glBegin(GL_QUADS);
-
-        // Frente
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, 0.5f, 0.5f);
-
-        // Trás
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, -0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, 0.5f, -0.5f);
-
-        // Esquerda
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(-0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(-0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, 0.5f, -0.5f);
-
-        // Direita
-        glTexCoord2f(0f, 0f); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(0.5f, 0.5f, -0.5f);
-
-        // Topo
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, 0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(-0.5f, 0.5f, 0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, 0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(0.5f, 0.5f, -0.5f);
-
-        // Fundo
-        glTexCoord2f(0f, 0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 0f); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(1f, 1f); glVertex3f(0.5f, -0.5f, 0.5f);
-        glTexCoord2f(0f, 1f); glVertex3f(-0.5f, -0.5f, 0.5f);
-
-        glEnd();
-        glPopMatrix();
     }
 
     public static void main(String[] args) {
