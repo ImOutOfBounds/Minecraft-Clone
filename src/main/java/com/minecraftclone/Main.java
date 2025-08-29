@@ -1,6 +1,7 @@
 package com.minecraftclone;
 
-import com.minecraftclone.world.Block;
+
+import com.minecraftclone.world.Chunk;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
@@ -148,15 +149,9 @@ public class Main {
             glRotatef(-yaw,   0f, 1f, 0f);
             glTranslatef(-camX, -camY, -camZ);
 
-            // 4) desenha o mundo (sem glRotatef fixo aqui)
-            for (int i = 0; i < chunkSize; i++) {
-                for (int j = 0; j < chunkSize * 2; j++) {
-                    for (int k = 0; k < chunkSize; k++) {
-                        Block.render(i, j, k, cubeTexture);
-                    }
-                }
-            }
-
+            Chunk.setChunkSize(16);
+            Chunk chunk = new Chunk();
+            chunk.render(cubeTexture);
 
             glfwSwapBuffers(window);
         }
