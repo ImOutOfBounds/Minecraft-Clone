@@ -12,14 +12,25 @@ public class Chunk {
         Chunk.chunkSize = chunkSize;
     }
 
-    public static void render(int cubeTexture, int chunkIndex_x, int chunkIndex_z){
+    public static void render(int cubeTexture, int chunkIndex_x, int chunkIndex_z) {
         for (int i = 0; i < chunkSize; i++) {
             for (int j = 0; j < chunkSize * 2; j++) {
                 for (int k = 0; k < chunkSize; k++) {
-                    Block.render(i + chunkIndex_x * chunkSize, j, k + chunkIndex_z * chunkSize, cubeTexture);
+                    int worldX = i + chunkIndex_x * chunkSize;
+                    int worldY = j;
+                    int worldZ = k + chunkIndex_z * chunkSize;
+
+                    // Desenhar apenas blocos "sólidos"
+                    if (shouldRenderBlock(worldX, worldY, worldZ)) {
+                        Block.render(worldX, worldY, worldZ, cubeTexture);
+                    }
                 }
             }
         }
+    }
+
+    private static boolean shouldRenderBlock(int x, int y, int z) {
+        return true;
     }
 
 
