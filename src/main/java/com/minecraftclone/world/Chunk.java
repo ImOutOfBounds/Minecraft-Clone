@@ -12,11 +12,11 @@ public class Chunk {
         Chunk.chunkSize = chunkSize;
     }
 
-    public static void render(int cubeTexture){
+    public static void render(int cubeTexture, int chunkIndex_x, int chunkIndex_z){
         for (int i = 0; i < chunkSize; i++) {
             for (int j = 0; j < chunkSize * 2; j++) {
                 for (int k = 0; k < chunkSize; k++) {
-                    Block.render(i, j, k, cubeTexture);
+                    Block.render(i + chunkIndex_x * chunkSize, j, k + chunkIndex_z * chunkSize, cubeTexture);
                 }
             }
         }

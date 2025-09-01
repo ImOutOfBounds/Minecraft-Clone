@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09bb2019-497f-46d7-be10-c7c9db060ea0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/Interface/IChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/minecraftclone/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/minecraftclone/world/Chunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minecraftclone/world/Chunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/minecraftclone/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minecraftclone/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minecraftclone/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minecraftclone/world/Chunk.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minecraftclone/world/Chunk.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

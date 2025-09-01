@@ -146,12 +146,17 @@ public class Main {
 
             // 3) aplica câmera por frame
             glRotatef(-pitch, 1f, 0f, 0f);
-            glRotatef(-yaw,   0f, 1f, 0f);
+            glRotatef(-yaw, 0f, 1f, 0f);
             glTranslatef(-camX, -camY, -camZ);
 
             Chunk.setChunkSize(16);
-            Chunk chunk = new Chunk();
-            chunk.render(cubeTexture);
+
+            int num_chunks = 3;
+            for (int i = 0; i < num_chunks; i++) {
+                for (int j = 0; j < num_chunks; j++){
+                    Chunk.render(cubeTexture, i, j);
+                }
+            }
 
             glfwSwapBuffers(window);
         }
